@@ -37,4 +37,29 @@ public class UserController {
     public Comment commentOnPost(@RequestBody Comment comment){
         return this.service.commentOnPost(comment);
     }
+
+    @PutMapping("/post/update")
+    public Post editPost(@RequestBody Post post){
+        return this.service.updatePost(post);
+    }
+
+    @PutMapping("/post/comment/update")
+    public Comment editComment(@RequestBody Comment comment){
+        return this.service.updateComment(comment);
+    }
+
+    @DeleteMapping("/post")
+    public String deletePost(@PathVariable String id){
+        return this.service.deletePost(Long.parseLong(id));
+    }
+
+    @DeleteMapping("/post/comment")
+    public String deleteComment(@PathVariable String id){
+        return this.service.deleteComment(Long.parseLong(id));
+    }
+
+    @DeleteMapping("/login")
+    public String deleteAccount(@PathVariable String id){
+        return this.service.deleteUser(Long.parseLong(id));
+    }
 }

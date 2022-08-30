@@ -46,4 +46,45 @@ public class ServiceImpl implements Service{
     public Comment commentOnPost(Comment comment) {
         return this.commentsDao.save(comment);
     }
+
+    @Override
+    public UserProfile updateProfile(UserProfile profile) {
+        return this.userDao.save(profile);
+    }
+
+    @Override
+    public Post updatePost(Post post) {
+        return this.postDao.save(post);
+    }
+
+    @Override
+    public Comment updateComment(Comment comment) {
+        return this.commentsDao.save(comment);
+    }
+
+    @Override
+    public String deletePost(Long id) {
+        this.postDao.deleteById(id);
+        return "Successfully Deleted";
+    }
+
+    @Override
+    public String deleteComment(Long id) {
+        this.commentsDao.deleteById(id);
+        return "Successfully Deleted";
+    }
+
+    @Override
+    public String deleteUser(Long id) {
+        UserProfile profile = null;
+        Optional<UserProfile> opt = this.userDao.findById(id);
+        if(opt.isPresent()){
+            profile=opt.get();
+            profile.setActive(Boolean.FALSE);
+        }
+        updateProfile(profile);
+        return "Account is successfully deactivated";
+    }
+
+
 }

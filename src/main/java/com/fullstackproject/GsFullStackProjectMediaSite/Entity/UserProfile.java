@@ -17,6 +17,7 @@ public class UserProfile {
     private String email;
     private String password;
     private String userName;
+    private Boolean active;
 
 
 
@@ -26,6 +27,15 @@ public class UserProfile {
         this.email = email;
         this.password = password;
         this.userName = userName;
+        active = true;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public String getUserName() {
