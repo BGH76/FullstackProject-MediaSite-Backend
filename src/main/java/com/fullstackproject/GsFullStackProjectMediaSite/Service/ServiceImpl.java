@@ -1,6 +1,10 @@
 package com.fullstackproject.GsFullStackProjectMediaSite.Service;
 
+import com.fullstackproject.GsFullStackProjectMediaSite.Dao.CommentsDao;
+import com.fullstackproject.GsFullStackProjectMediaSite.Dao.PostDao;
 import com.fullstackproject.GsFullStackProjectMediaSite.Dao.UserDao;
+import com.fullstackproject.GsFullStackProjectMediaSite.Entity.Comment;
+import com.fullstackproject.GsFullStackProjectMediaSite.Entity.Post;
 import com.fullstackproject.GsFullStackProjectMediaSite.Entity.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +15,10 @@ public class ServiceImpl implements Service{
 
     @Autowired
     UserDao userDao;
+    @Autowired
+    PostDao postDao;
+    @Autowired
+    CommentsDao commentsDao;
 
     @Override
     public UserProfile createProfile(UserProfile user) {
@@ -27,5 +35,15 @@ public class ServiceImpl implements Service{
             throw new RuntimeException("Thee is no user with this iD");
         }
         return user;
+    }
+
+    @Override
+    public Post createPost(Post post) {
+        return this.postDao.save(post);
+    }
+
+    @Override
+    public Comment commentOnPost(Comment comment) {
+        return this.commentsDao.save(comment);
     }
 }
