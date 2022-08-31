@@ -8,6 +8,7 @@ import com.fullstackproject.GsFullStackProjectMediaSite.Entity.Post;
 import com.fullstackproject.GsFullStackProjectMediaSite.Entity.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Optional;
 
 @org.springframework.stereotype.Service
@@ -35,6 +36,21 @@ public class ServiceImpl implements Service{
             throw new RuntimeException("Thee is no user with this iD");
         }
         return user;
+    }
+
+    @Override
+    public List<UserProfile> findAllUsers() {
+        return this.userDao.findAll();
+    }
+
+    @Override
+    public List<Comment> findAllComment() {
+        return this.commentsDao.findAll();
+    }
+
+    @Override
+    public List<Post> findAllPost() {
+        return this.postDao.findAll();
     }
 
     @Override

@@ -7,6 +7,8 @@ import com.fullstackproject.GsFullStackProjectMediaSite.Service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class UserController {
 
@@ -16,6 +18,21 @@ public class UserController {
     @GetMapping("/")
     public String welcome(){
         return "Hello";
+    }
+
+    @GetMapping("/users")
+    public List<UserProfile> findAllUsers(){
+        return this.service.findAllUsers();
+    }
+
+    @GetMapping("/post/comment")
+    public List<Comment> findAllComments(){
+        return this.service.findAllComment();
+    }
+
+    @GetMapping("/post")
+    public List<Post> findAllPosts(){
+        return this.service.findAllPost();
     }
 
     @PostMapping("/createProfile")
