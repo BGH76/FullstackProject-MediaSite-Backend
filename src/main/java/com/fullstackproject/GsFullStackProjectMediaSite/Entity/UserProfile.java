@@ -1,33 +1,29 @@
 package com.fullstackproject.GsFullStackProjectMediaSite.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
 @Entity
+@Table(name = "Users")
 public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
-    private String LastName;
+    private String lastName;
     private String email;
     private String password;
     private String userName;
-    private Boolean active;
-
+    private Boolean active = Boolean.TRUE;;
 
 
     public UserProfile(String firstName, String lastName, String email, String password, String userName) {
         this.firstName = firstName;
-        LastName = lastName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.userName = userName;
-        active = true;
     }
 
     public Boolean getActive() {
@@ -65,12 +61,12 @@ public class UserProfile {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return LastName;
+    public String getlastName() {
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
     public String getEmail() {

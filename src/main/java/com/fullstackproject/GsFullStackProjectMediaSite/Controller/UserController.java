@@ -18,12 +18,13 @@ public class UserController {
         return "Hello";
     }
 
-    @PostMapping("/create_profile")
+    @PostMapping("/createProfile")
     public UserProfile addUser(@RequestBody UserProfile profile){
+        System.out.println("Last name"+profile.getFirstName());
         return this.service.createProfile(profile);
     }
 
-    @GetMapping("/login")
+    @GetMapping("/login/{id}")
     public UserProfile logIn(@PathVariable String id){
         return this.service.logIn(Long.parseLong(id));
     }
@@ -48,17 +49,17 @@ public class UserController {
         return this.service.updateComment(comment);
     }
 
-    @DeleteMapping("/post")
+    @DeleteMapping("/post/{id}")
     public String deletePost(@PathVariable String id){
         return this.service.deletePost(Long.parseLong(id));
     }
 
-    @DeleteMapping("/post/comment")
+    @DeleteMapping("/post/comment/{id}")
     public String deleteComment(@PathVariable String id){
         return this.service.deleteComment(Long.parseLong(id));
     }
 
-    @DeleteMapping("/login")
+    @DeleteMapping("/login/{id}")
     public String deleteAccount(@PathVariable String id){
         return this.service.deleteUser(Long.parseLong(id));
     }
