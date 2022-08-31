@@ -8,6 +8,7 @@ import com.fullstackproject.GsFullStackProjectMediaSite.Entity.Post;
 import com.fullstackproject.GsFullStackProjectMediaSite.Entity.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +52,28 @@ public class ServiceImpl implements Service{
     @Override
     public List<Post> findAllPost() {
         return this.postDao.findAll();
+    }
+
+    @Override
+    public List<Post> findAllPostByUser(Long id) {
+        List<Post> res = new ArrayList<>();
+        for(Post p : this.postDao.findAll()){
+            if(p.getUserId() == id){
+                res.add(p);
+            }
+        }
+        return res;
+    }
+
+    @Override
+    public List<Comment> findAllCommentByPost(Long id) {
+        List<Comment> res = new ArrayList<>();
+        for(Comment c : this.commentsDao.findAll()){
+            if(c.getPostId() == id){
+                res.add(c);
+            }
+        }
+        return res;
     }
 
     @Override

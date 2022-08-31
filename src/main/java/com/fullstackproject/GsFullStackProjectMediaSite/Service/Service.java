@@ -13,6 +13,8 @@ public interface Service {
     List<UserProfile> findAllUsers();
     List<Comment> findAllComment();
     List<Post> findAllPost();
+    List<Post> findAllPostByUser(Long id);
+    List<Comment> findAllCommentByPost(Long id);
     Post createPost(Post post);
     Comment commentOnPost(Comment comment);
     UserProfile updateProfile(UserProfile profile);

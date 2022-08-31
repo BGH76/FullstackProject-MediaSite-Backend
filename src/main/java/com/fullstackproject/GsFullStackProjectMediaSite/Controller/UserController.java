@@ -20,6 +20,16 @@ public class UserController {
         return "Hello";
     }
 
+    @GetMapping("/post/{id}")
+    public List<Post> findAllPostByUser(@PathVariable Long id){
+        return this.service.findAllPostByUser(id);
+    }
+
+    @GetMapping("/post/comment/{id}")
+    public List<Comment> findAllCommentByPost(@PathVariable Long id){
+        return this.service.findAllCommentByPost(id);
+    }
+
     @GetMapping("/users")
     public List<UserProfile> findAllUsers(){
         return this.service.findAllUsers();
