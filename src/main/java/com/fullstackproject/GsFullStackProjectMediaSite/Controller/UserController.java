@@ -1,13 +1,16 @@
 package com.fullstackproject.GsFullStackProjectMediaSite.Controller;
 
 import com.fullstackproject.GsFullStackProjectMediaSite.Entity.Comment;
+import com.fullstackproject.GsFullStackProjectMediaSite.Entity.Friends;
 import com.fullstackproject.GsFullStackProjectMediaSite.Entity.Post;
 import com.fullstackproject.GsFullStackProjectMediaSite.Entity.UserProfile;
 import com.fullstackproject.GsFullStackProjectMediaSite.Service.Service;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserController {
@@ -18,6 +21,11 @@ public class UserController {
     @GetMapping("/")
     public String welcome(){
         return "Hello";
+    }
+
+    @GetMapping("/user/friends_post/{id}") //Use this to extract the Jason you need for the front end
+    public List<Map<String,Object>> userFriendPost(@PathVariable String id){
+        return this.service.onLogIn(Long.parseLong(id));
     }
 
     @GetMapping("/post/{id}")
@@ -45,14 +53,14 @@ public class UserController {
         return this.service.findAllPost();
     }
 
-    @PostMapping("/createProfile")
+    @PostMapping("/create_profile")
     public UserProfile addUser(@RequestBody UserProfile profile){
         System.out.println("Last name"+profile.getFirstName());
         return this.service.createProfile(profile);
     }
 
-    @GetMapping("/login/{id}")
-    public UserProfile logIn(@PathVariable String id){
+    @GetMapping("/user/{id}")
+    public UserProfile userLogIn(@PathVariable String id){
         return this.service.logIn(Long.parseLong(id));
     }
 
@@ -87,7 +95,27 @@ public class UserController {
     }
 
     @DeleteMapping("/login/{id}")
-    public String deleteAccount(@PathVariable String id){
+    public String deActivateAccount(@PathVariable String id){
         return this.service.deleteUser(Long.parseLong(id));
     }
+
+    @PostMapping("/login/friend_request")
+    public Friends requestFriendship(@RequestBody Friends friends){
+        return this.service.requestFrienship(friends);
+    }
+
+    @GetMapping("/login/friends/{id}")
+    public List<UserProfile> showAllFriends(@PathVariable Long id){
+        return this.service.showAllFriends(id);
+    }
+
+    /*
+    @GetMapping("/user/friends_post/{id}")
+    public List<JSONObject> userFriendPost(@PathVariable String id){
+        System.out.println("*************************************************");
+        System.out.println(this.service.onLogIn(Long.parseLong(id)));
+        System.out.println("*************************************************");
+
+        return this.service.onLogIn(Long.parseLong(id));
+    }*/
 }

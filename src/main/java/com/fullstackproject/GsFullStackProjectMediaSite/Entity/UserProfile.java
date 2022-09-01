@@ -1,7 +1,9 @@
 package com.fullstackproject.GsFullStackProjectMediaSite.Entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -15,8 +17,7 @@ public class UserProfile {
     private String email;
     private String password;
     private String userName;
-    private Boolean active = Boolean.TRUE;;
-
+    private Boolean active = Boolean.TRUE;
 
     public UserProfile(String firstName, String lastName, String email, String password, String userName) {
         this.firstName = firstName;
@@ -83,6 +84,10 @@ public class UserProfile {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getName(){
+        return getFirstName()+" " +getlastName();
     }
 
 }

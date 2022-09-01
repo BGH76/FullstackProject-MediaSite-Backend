@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
 @Entity
 public class Post {
@@ -12,6 +13,8 @@ public class Post {
     private Long id;
     private Long userId;
     private String post;
+
+    private LocalDate date = LocalDate.now();
 
     public Post(Long userId, String post) {
         this.userId = userId;
@@ -44,5 +47,13 @@ public class Post {
 
     public void setPost(String post) {
         this.post = post;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }
