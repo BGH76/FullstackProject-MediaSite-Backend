@@ -24,8 +24,10 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public List<Object> login(@RequestBody String userName, @RequestBody String password){
-        String[] s = {userName, password};
+    public Map<String,Object> login(@RequestBody String userName,String password){
+        String[] s = new String[2];
+        s[0] = userName;
+        s[1] = password;
         return this.service.login(s);
     }
 

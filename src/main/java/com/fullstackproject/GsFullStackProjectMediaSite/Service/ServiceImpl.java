@@ -9,13 +9,14 @@ import com.fullstackproject.GsFullStackProjectMediaSite.Entity.Friends;
 import com.fullstackproject.GsFullStackProjectMediaSite.Entity.Post;
 import com.fullstackproject.GsFullStackProjectMediaSite.Entity.UserProfile;
 import netscape.javascript.JSObject;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.hibernate.annotations.LazyToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
-import org.json.JSONObject;
-import org.json.JSONException;
+
 
 @org.springframework.stereotype.Service
 public class ServiceImpl implements Service{
@@ -31,21 +32,34 @@ public class ServiceImpl implements Service{
     FriendsDao friendsDao;
 
     @Override
-    public List<Object> login(String[] uNamePass) {
+    public Map<String,Object> login(String[] uNamePass) {
+        Map<String,Object> map = new HashMap<>();
         List<Object> list = new ArrayList<>();
-        UserProfile userProfile = findByUsername(uNamePass[0]);
-        if(userProfile == null){
-            list.add(Boolean.FALSE);
-            list.add(0);
-        }
-        else{
-            if(userProfile.getPassword().equals(uNamePass[1])){
-                list.add(Boolean.TRUE);
-                list.add(userProfile.getId());
+        try{
+            JSONParser jsonParser = new JSONParser();
+            JSONObject jsonObject = (JSONObject)jsonParser.parse(uNamePass[0]);
+            System.out.println("Name from the input"+uNamePass[0]);
+            System.out.println("From JSON object "+jsonObject.get("userName"));
+            System.out.println("Name from the input"+uNamePass[1]);
+            UserProfile userProfile = findByUsername((String)jsonObject.get("userName"));
+            System.out.println("Output from the search"+userProfile);
+            if(userProfile == null){
+                map.put("status",Boolean.FALSE);
+                map.put("userId",0);;
+                map.put("userName",null);
+            }
+            else{
+                if(userProfile.getPassword().equals((String)jsonObject.get("password"))){
+                    map.put("status",Boolean.TRUE);
+                    map.put("userId",userProfile.getId());;
+                    map.put("userName",userProfile.getUserName());
+                }
             }
         }
-
-        return list;
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return map;
     }
 
     @Override
@@ -54,6 +68,7 @@ public class ServiceImpl implements Service{
         UserProfile user = null;
         list = findAllUsers();
         for (UserProfile u : list){
+            System.out.println(u.getUserName() + username);
             if(u.getUserName().equals(username)){
                 user = u;
             }
