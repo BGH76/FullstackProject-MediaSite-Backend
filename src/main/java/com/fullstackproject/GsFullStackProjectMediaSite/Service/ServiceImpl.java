@@ -31,6 +31,19 @@ public class ServiceImpl implements Service{
     FriendsDao friendsDao;
 
     @Override
+    public UserProfile findByUsername(String username) {
+        List<UserProfile> list = new ArrayList<>();
+        UserProfile user = null;
+        list = findAllUsers();
+        for (UserProfile u : list){
+            if(u.getUserName().equals(username)){
+                user = u;
+            }
+        }
+        return user;
+    }
+
+    @Override
     public List<Map<String,Object>> onLogIn(Long id){
 
         List<Map<String,Object>> list = new ArrayList<>();
@@ -61,12 +74,15 @@ public class ServiceImpl implements Service{
     }
 
     @Override
-    public Map<Long,String> findAllCommentByPostAsString(Long id) {
+    public Map<Long,Map<String,String>> findAllCommentByPostAsString(Long id) {
         List<Comment> list = findAllCommentByPost(id);
-        Map<Long,String> map= new HashMap<>();
+        Map<Long,Map<String,String>> map= new HashMap<>();
+        Map<String,String> mapIn;
 
         for(Comment c: list){
-            map.put(c.getId(),c.getComment());
+            mapIn = new HashMap<>();
+            mapIn.put(findUser(c.getUserId()).getName(),c.getComment());
+            map.put(c.getId(),mapIn);
         }
         return  map;
     }
@@ -77,13 +93,13 @@ public class ServiceImpl implements Service{
     }
 
     @Override
-    public UserProfile logIn(Long iD) {
+    public UserProfile findUser(Long iD) {
         UserProfile user = null;
         Optional<UserProfile> opt = this.userDao.findById(iD);
         if(opt.isPresent())
             user = opt.get();
         else {
-            throw new RuntimeException("Thee is no user with this iD");
+            throw new RuntimeException("There is no user with this iD");
         }
         return user;
     }

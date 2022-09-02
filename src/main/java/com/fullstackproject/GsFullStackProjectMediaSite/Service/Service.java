@@ -11,11 +11,12 @@ import java.util.List;
 import java.util.Map;
 
 public interface Service {
+    UserProfile findByUsername(String username);
     List<Map<String,Object>> onLogIn(Long id);
     List<Map<String,Object>> findAllPostByUserAsString(UserProfile u);
-    Map<Long,String> findAllCommentByPostAsString(Long id);
+    Map<Long,Map<String,String>> findAllCommentByPostAsString(Long id);
     UserProfile createProfile(UserProfile user);
-    UserProfile logIn(Long iD);
+    UserProfile findUser(Long iD);
     List<UserProfile> findAllUsers();
     List<Comment> findAllComment();
     List<Post> findAllPost();

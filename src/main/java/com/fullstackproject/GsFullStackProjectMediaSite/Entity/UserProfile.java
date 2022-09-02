@@ -1,13 +1,16 @@
 package com.fullstackproject.GsFullStackProjectMediaSite.Entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Builder
 @Entity
-@Table(name = "Users")
 public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,6 +21,16 @@ public class UserProfile {
     private String password;
     private String userName;
     private Boolean active = Boolean.TRUE;
+
+    public UserProfile(Long id, String firstName, String lastName, String email, String password, String userName, Boolean active) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.userName = userName;
+        this.active = active;
+    }
 
     public UserProfile(String firstName, String lastName, String email, String password, String userName) {
         this.firstName = firstName;

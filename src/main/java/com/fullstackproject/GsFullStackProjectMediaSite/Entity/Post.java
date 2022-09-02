@@ -1,11 +1,14 @@
 package com.fullstackproject.GsFullStackProjectMediaSite.Entity;
 
+import lombok.Builder;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
+@Builder
 @Entity
 public class Post {
     @Id
@@ -15,6 +18,13 @@ public class Post {
     private String post;
 
     private LocalDate date = LocalDate.now();
+
+    public Post(Long id, Long userId, String post, LocalDate date) {
+        this.id = id;
+        this.userId = userId;
+        this.post = post;
+        this.date = date;
+    }
 
     public Post(Long userId, String post) {
         this.userId = userId;

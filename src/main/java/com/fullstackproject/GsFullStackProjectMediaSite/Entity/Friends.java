@@ -1,10 +1,13 @@
 package com.fullstackproject.GsFullStackProjectMediaSite.Entity;
 
+import lombok.Builder;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Builder
 @Entity
 public class Friends {
 
@@ -22,6 +25,14 @@ public class Friends {
     public Friends(Long userOneId, Long userTwoId) {
         this.userOneId = userOneId;
         this.userTwoId = userTwoId;
+    }
+
+    public Friends(Long id, Long userOneId, Long userTwoId, Boolean friend, Boolean requested) {
+        this.id = id;
+        this.userOneId = userOneId;
+        this.userTwoId = userTwoId;
+        this.friend = friend;
+        this.requested = requested;
     }
 
     public Long getId() {

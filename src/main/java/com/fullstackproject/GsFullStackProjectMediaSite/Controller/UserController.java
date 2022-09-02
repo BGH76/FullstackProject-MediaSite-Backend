@@ -11,12 +11,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 @RestController
 public class UserController {
 
     @Autowired
     Service service;
+
+    UserProfile findByUsername(String username){
+        return this.service.findByUsername(username);
+    }
 
     @GetMapping("/")
     public String welcome(){
@@ -61,7 +66,7 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public UserProfile userLogIn(@PathVariable String id){
-        return this.service.logIn(Long.parseLong(id));
+        return this.service.findUser(Long.parseLong(id));
     }
 
     @PostMapping("/post")
@@ -118,4 +123,5 @@ public class UserController {
 
         return this.service.onLogIn(Long.parseLong(id));
     }*/
+
 }
