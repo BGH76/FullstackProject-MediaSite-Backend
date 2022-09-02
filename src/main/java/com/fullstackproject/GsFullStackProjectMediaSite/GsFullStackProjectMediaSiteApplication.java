@@ -55,38 +55,5 @@ public class GsFullStackProjectMediaSiteApplication {
 					Comment.builder().id(25L).postId(15L).userId(1L).comment("This is the comment on 16L by 1").build()));
 		};
 	}
-/*
-	@Bean
-	ApplicationRunner init(FriendsDao friendsDao){
-		return args -> friendsDao.saveAll(Arrays.asList(Friends.builder().id(10L).userOneId(1L).userTwoId(2L).friend(Boolean.TRUE).requested(Boolean.TRUE).build(),
-				Friends.builder().id(11L).userOneId(1L).userTwoId(2L).friend(Boolean.TRUE).requested(Boolean.TRUE).build(),
-				Friends.builder().id(12L).userOneId(1L).userTwoId(3L).friend(Boolean.TRUE).requested(Boolean.TRUE).build(),
-				Friends.builder().id(13L).userOneId(1L).userTwoId(4L).friend(Boolean.TRUE).requested(Boolean.TRUE).build(),
-				Friends.builder().id(14L).userOneId(2L).userTwoId(3L).friend(Boolean.TRUE).requested(Boolean.TRUE).build()));
-	}
-
-	@Bean
-	ApplicationRunner init(PostDao postDao){
-		return args -> postDao.saveAll(Arrays.asList(Post.builder().id(1L).userId(1L).post("This is post1 by 1").date(LocalDate.now()).build(),
-				Post.builder().id(2L).userId(1L).post("This is post2 by 1").date(LocalDate.now()).build(),
-				Post.builder().id(3L).userId(2L).post("This is post1 by 2").date(LocalDate.now()).build(),
-				Post.builder().id(4L).userId(2L).post("This is post2 by 2").date(LocalDate.now()).build(),
-				Post.builder().id(5L).userId(2L).post("This is post3 by 3").date(LocalDate.now()).build(),
-				Post.builder().id(6L).userId(3L).post("This is post1 by 3").date(LocalDate.now()).build()));
-	}
-
-	@Bean
-	ApplicationRunner init(CommentsDao commentsDao){
-		return args -> commentsDao.saveAll(Arrays.asList(Comment.builder().id(1L).postId(1L).userId(2L).comment("This is the comment on 1L by 2").build(),
-				Comment.builder().id(2L).postId(1L).userId(3L).comment("This is the comment on 1L by 3").build(),
-				Comment.builder().id(3L).postId(1L).userId(4L).comment("This is the comment on 1L by 4").build(),
-				Comment.builder().id(4L).postId(2L).userId(2L).comment("This is the comment on 1L by 2").build(),
-				Comment.builder().id(5L).postId(2L).userId(4L).comment("This is the comment on 1L by 2").build(),
-				Comment.builder().id(6L).postId(3L).userId(1L).comment("This is the comment on 1L by 2").build(),
-				Comment.builder().id(7L).postId(3L).userId(3L).comment("This is the comment on 1L by 2").build(),
-				Comment.builder().id(8L).postId(4L).userId(1L).comment("This is the comment on 1L by 2").build(),
-				Comment.builder().id(9L).postId(6L).userId(2L).comment("This is the comment on 1L by 2").build(),
-				Comment.builder().id(10L).postId(6L).userId(1L).comment("This is the comment on 1L by 2").build()));
-	}*/
 
 }
