@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface Service {
+    List<Object> login(String[] uNamePass);
     UserProfile findByUsername(String username);
     List<Map<String,Object>> onLogIn(Long id);
     List<Map<String,Object>> findAllPostByUserAsString(UserProfile u);

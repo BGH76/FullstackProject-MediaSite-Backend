@@ -1,3 +1,4 @@
+/*
 package com.fullstackproject.GsFullStackProjectMediaSite.Config;
 
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/**").authorizeRequests().anyRequest().hasRole("USER")
-                .and().formLogin().loginPage("/login.jsp")
+                .and().formLogin().loginPage("/{username}/{password}")
                 .failureUrl("/login.jsp?error=1").loginProcessingUrl("/login")
                 .permitAll().and().logout()
                 .logoutSuccessUrl("/listEmployees.html");
@@ -27,3 +28,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+*/

@@ -31,6 +31,24 @@ public class ServiceImpl implements Service{
     FriendsDao friendsDao;
 
     @Override
+    public List<Object> login(String[] uNamePass) {
+        List<Object> list = new ArrayList<>();
+        UserProfile userProfile = findByUsername(uNamePass[0]);
+        if(userProfile == null){
+            list.add(Boolean.FALSE);
+            list.add(0);
+        }
+        else{
+            if(userProfile.getPassword().equals(uNamePass[1])){
+                list.add(Boolean.TRUE);
+                list.add(userProfile.getId());
+            }
+        }
+
+        return list;
+    }
+
+    @Override
     public UserProfile findByUsername(String username) {
         List<UserProfile> list = new ArrayList<>();
         UserProfile user = null;
@@ -81,7 +99,8 @@ public class ServiceImpl implements Service{
 
         for(Comment c: list){
             mapIn = new HashMap<>();
-            mapIn.put(findUser(c.getUserId()).getName(),c.getComment());
+            mapIn.put("commentName",findUser(c.getUserId()).getName());
+            mapIn.put("comment",c.getComment());
             map.put(c.getId(),mapIn);
         }
         return  map;

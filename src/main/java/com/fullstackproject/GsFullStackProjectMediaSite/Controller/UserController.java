@@ -23,10 +23,17 @@ public class UserController {
         return this.service.findByUsername(username);
     }
 
-    @GetMapping("/")
-    public String welcome(){
-        return "Hello";
+    @PostMapping("/login")
+    public List<Object> login(@RequestBody String userName, @RequestBody String password){
+        String[] s = {userName, password};
+        return this.service.login(s);
     }
+
+    @GetMapping("/{username}/{password}")
+    public String welcome(@PathVariable String username, @PathVariable String password){
+        return "Hello" ;
+    }
+
 
     @GetMapping("/user/friends_post/{id}") //Use this to extract the Jason you need for the front end
     public List<Map<String,Object>> userFriendPost(@PathVariable String id){
