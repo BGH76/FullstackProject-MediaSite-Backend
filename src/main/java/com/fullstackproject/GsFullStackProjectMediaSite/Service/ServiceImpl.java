@@ -33,16 +33,12 @@ public class ServiceImpl implements Service{
 
     @Override
     public Map<String,Object> login(String[] uNamePass) {
-        Map<String,Object> map = new HashMap<>();
+        Map<String,Object> map = new HashMap<>();;
         List<Object> list = new ArrayList<>();
         try{
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonObject = (JSONObject)jsonParser.parse(uNamePass[0]);
-            System.out.println("Name from the input"+uNamePass[0]);
-            System.out.println("From JSON object "+jsonObject.get("userName"));
-            System.out.println("Name from the input"+uNamePass[1]);
             UserProfile userProfile = findByUsername((String)jsonObject.get("userName"));
-            System.out.println("Output from the search"+userProfile);
             if(userProfile == null){
                 map.put("status",Boolean.FALSE);
                 map.put("userId",0);;
@@ -99,26 +95,28 @@ public class ServiceImpl implements Service{
             map.put("name",u.getName());
             map.put("date",p.getDate());
             map.put("post",p.getPost());
+            map.put("postId",p.getId());
             map.put("comments",findAllCommentByPostAsString(p.getId()));
             list.add(map);
         }
-
         return list;
     }
 
     @Override
-    public Map<Long,Map<String,String>> findAllCommentByPostAsString(Long id) {
+    public List<Map<String,String>> findAllCommentByPostAsString(Long id) {
         List<Comment> list = findAllCommentByPost(id);
+        List<Map<String,String>> list1 = new ArrayList<>();
         Map<Long,Map<String,String>> map= new HashMap<>();
         Map<String,String> mapIn;
 
         for(Comment c: list){
             mapIn = new HashMap<>();
+            mapIn.put("commentId",String.valueOf(c.getId()));
             mapIn.put("commentName",findUser(c.getUserId()).getName());
             mapIn.put("comment",c.getComment());
-            map.put(c.getId(),mapIn);
+            list1.add(mapIn);
         }
-        return  map;
+        return  list1;
     }
 
     @Override
@@ -186,8 +184,14 @@ public class ServiceImpl implements Service{
     }
 
     @Override
-    public Friends requestFrienship(Friends friends) {
-        return this.friendsDao.save(friends);
+    public Friends requestFrienship(Friends friend) {
+        List<UserProfile> friends = showAllFriends(friend.getUserOneId());
+        for(UserProfile u : friends){
+            if(u.getId() == friend.getUserTwoId()){
+                return null;
+            }
+        }
+        return this.friendsDao.save(friend);
     }
 
     @Override

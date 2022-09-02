@@ -33,7 +33,6 @@ public class GsFullStackProjectMediaSiteApplication {
 					UserProfile.builder().id(3L).firstName("Tom").lastName("Hanks").email("Hanks@gmail.com").password("12345").userName("THanks").active(Boolean.TRUE).build(),
 					UserProfile.builder().id(4L).firstName("Ray").lastName("Light").email("Light@gmail.com").password("12345").userName("RLight").active(Boolean.TRUE).build()));
 			friendsDao.saveAll(Arrays.asList(Friends.builder().id(10L).userOneId(1L).userTwoId(2L).friend(Boolean.TRUE).requested(Boolean.TRUE).build(),
-					Friends.builder().id(11L).userOneId(1L).userTwoId(2L).friend(Boolean.TRUE).requested(Boolean.TRUE).build(),
 					Friends.builder().id(12L).userOneId(1L).userTwoId(3L).friend(Boolean.TRUE).requested(Boolean.TRUE).build(),
 					Friends.builder().id(13L).userOneId(1L).userTwoId(4L).friend(Boolean.TRUE).requested(Boolean.TRUE).build(),
 					Friends.builder().id(14L).userOneId(2L).userTwoId(3L).friend(Boolean.TRUE).requested(Boolean.TRUE).build()));

@@ -15,7 +15,7 @@ public interface Service {
     UserProfile findByUsername(String username);
     List<Map<String,Object>> onLogIn(Long id);
     List<Map<String,Object>> findAllPostByUserAsString(UserProfile u);
-    Map<Long,Map<String,String>> findAllCommentByPostAsString(Long id);
+    List<Map<String,String>> findAllCommentByPostAsString(Long id);
     UserProfile createProfile(UserProfile user);
     UserProfile findUser(Long iD);
     List<UserProfile> findAllUsers();

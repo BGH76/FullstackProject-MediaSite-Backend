@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 @RestController
 public class UserController {
 
