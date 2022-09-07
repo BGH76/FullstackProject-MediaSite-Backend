@@ -18,7 +18,7 @@ public interface Service {
     List<Map<String,String>> findAllCommentByPostAsString(Long id);
     UserProfile createProfile(UserProfile user);
     UserProfile findUser(Long iD);
-    List<UserProfile> findAllUsers();
+    List<Map<String,Object>> findAllUsers(Long id);
     List<Comment> findAllComment();
     List<Post> findAllPost();
     List<Post> findAllPostByUser(Long id);

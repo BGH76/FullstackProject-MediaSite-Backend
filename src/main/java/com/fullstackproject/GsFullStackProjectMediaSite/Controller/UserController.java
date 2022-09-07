@@ -54,9 +54,9 @@ public class UserController {
         return this.service.findAllCommentByPost(id);
     }
 
-    @GetMapping("/users")
-    public List<UserProfile> findAllUsers(){
-        return this.service.findAllUsers();
+    @GetMapping("/users/{id}")
+    public List<Map<String,Object>> findAllUsers(@PathVariable Long id){
+        return this.service.findAllUsers(id);
     }
 
     @GetMapping("/post/comment")

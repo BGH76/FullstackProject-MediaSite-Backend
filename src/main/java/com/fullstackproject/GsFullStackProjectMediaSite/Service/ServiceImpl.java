@@ -62,7 +62,7 @@ public class ServiceImpl implements Service{
     public UserProfile findByUsername(String username) {
         List<UserProfile> list = new ArrayList<>();
         UserProfile user = null;
-        list = findAllUsers();
+        list = this.userDao.findAll();
         for (UserProfile u : list){
             System.out.println(u.getUserName() + username);
             if(u.getUserName().equals(username)){
@@ -137,8 +137,22 @@ public class ServiceImpl implements Service{
     }
 
     @Override
-    public List<UserProfile> findAllUsers() {
-        return this.userDao.findAll();
+    public List<Map<String,Object>> findAllUsers(Long id) {
+        List<UserProfile> list = this.userDao.findAll();
+        List<Map<String,Object>> resList = new ArrayList<>();
+        Map<String,Object> map;
+        for(UserProfile user : list){
+            map = new HashMap<>();;
+            if(user.getId() != id){
+                map.put("firstName", user.getFirstName());
+                map.put("lastName", user.getlastName());
+                map.put("id", user.getId());
+                map.put("email",user.getEmail());
+                map.put("userName",user.getUserName());
+            }
+            resList.add(map);
+        }
+        return resList;
     }
 
     @Override
