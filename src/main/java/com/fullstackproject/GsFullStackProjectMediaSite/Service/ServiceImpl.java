@@ -149,8 +149,8 @@ public class ServiceImpl implements Service{
                 map.put("id", user.getId());
                 map.put("email",user.getEmail());
                 map.put("userName",user.getUserName());
+                resList.add(map);
             }
-            resList.add(map);
         }
         return resList;
     }
