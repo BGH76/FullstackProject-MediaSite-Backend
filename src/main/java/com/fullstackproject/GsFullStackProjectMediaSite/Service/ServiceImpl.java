@@ -77,27 +77,35 @@ public class ServiceImpl implements Service{
 
         List<Map<String,Object>> list = new ArrayList<>();
         Optional<UserProfile> opt = this.userDao.findById(id);
+        List<Long> ids = new ArrayList<>();
         if(opt.isPresent())
         {
             for(UserProfile u : showAllFriends(id)){
-                list.addAll(findAllPostByUserAsString(u));
+                ids.add(u.getId());
             }
+
         };
-        return list;
+        return findAllPostByUserAsString(ids);
     }
     @Override
-    public List<Map<String,Object>> findAllPostByUserAsString(UserProfile u){
+    public List<Map<String,Object>> findAllPostByUserAsString(List<Long> ids ){
+
         List<Map<String,Object>> list = new ArrayList<>();
         Map<String,Object> map;
-
-        for(Post p:findAllPostByUser(u.getId())) {
-            map = new HashMap<>();
-            map.put("name",u.getName());
-            map.put("date",p.getDate());
-            map.put("post",p.getPost());
-            map.put("postId",p.getId());
-            map.put("comments",findAllCommentByPostAsString(p.getId()));
-            list.add(map);
+        List<Post> posts = this.postDao.findAll();
+        Collections.sort(posts);
+        UserProfile user;
+        for(Post p:posts) {
+            if(ids.contains(p.getUserId())){
+                map = new HashMap<>();
+                user = this.userDao.findById(p.getUserId()).get();
+                map.put("name",user.getName());
+                map.put("date",p.getDate());
+                map.put("post",p.getPost());
+                map.put("postId",p.getId());
+                map.put("comments",findAllCommentByPostAsString(p.getId()));
+                list.add(map);
+            }
         }
         return list;
     }
@@ -149,8 +157,8 @@ public class ServiceImpl implements Service{
                 map.put("id", user.getId());
                 map.put("email",user.getEmail());
                 map.put("userName",user.getUserName());
+                resList.add(map);
             }
-            resList.add(map);
         }
         return resList;
     }
@@ -162,7 +170,9 @@ public class ServiceImpl implements Service{
 
     @Override
     public List<Post> findAllPost() {
-        return this.postDao.findAll();
+        List<Post> posts = this.postDao.findAll();
+        Collections.sort(posts);
+        return posts;
     }
 
     @Override

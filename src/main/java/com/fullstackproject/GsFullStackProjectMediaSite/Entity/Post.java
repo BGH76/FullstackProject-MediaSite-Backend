@@ -7,10 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Builder
 @Entity
-public class Post {
+public class Post implements Comparable<Post>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -30,6 +31,7 @@ public class Post {
         this.userId = userId;
         this.post = post;
     }
+
 
     public Post(){
 
@@ -65,5 +67,10 @@ public class Post {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @Override
+    public int compareTo(Post o) {
+        return (int)(ChronoUnit.DAYS.between(o.getDate(), date));
     }
 }

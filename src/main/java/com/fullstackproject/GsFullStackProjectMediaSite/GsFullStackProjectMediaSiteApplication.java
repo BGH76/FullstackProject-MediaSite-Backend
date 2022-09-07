@@ -38,11 +38,11 @@ public class GsFullStackProjectMediaSiteApplication {
 					Friends.builder().id(13L).userOneId(1L).userTwoId(4L).friend(Boolean.TRUE).requested(Boolean.TRUE).build(),
 					Friends.builder().id(14L).userOneId(2L).userTwoId(3L).friend(Boolean.TRUE).requested(Boolean.TRUE).build()));
 			postDao.saveAll(Arrays.asList(Post.builder().id(10L).userId(1L).post("This is post1 by 1").date(LocalDate.now()).build(),
-					Post.builder().id(11L).userId(1L).post("This is post2 by 1").date(LocalDate.now()).build(),
-					Post.builder().id(12L).userId(2L).post("This is post1 by 2").date(LocalDate.now()).build(),
-					Post.builder().id(13L).userId(2L).post("This is post2 by 2").date(LocalDate.now()).build(),
-					Post.builder().id(14L).userId(2L).post("This is post3 by 3").date(LocalDate.now()).build(),
-					Post.builder().id(15L).userId(3L).post("This is post1 by 3").date(LocalDate.now()).build()));
+					Post.builder().id(11L).userId(1L).post("This is post2 by 1").date(LocalDate.now().minusDays(25)).build(),
+					Post.builder().id(12L).userId(2L).post("This is post1 by 2").date(LocalDate.now().minusDays(30)).build(),
+					Post.builder().id(13L).userId(2L).post("This is post2 by 2").date(LocalDate.now().minusDays(20)).build(),
+					Post.builder().id(14L).userId(2L).post("This is post3 by 3").date(LocalDate.now().minusDays(25)).build(),
+					Post.builder().id(15L).userId(3L).post("This is post1 by 3").date(LocalDate.now().minusDays(2)).build()));
 			commentsDao.saveAll(Arrays.asList(Comment.builder().id(16L).postId(10L).userId(2L).comment("This is the comment on 10L by 2").build(),
 					Comment.builder().id(17L).postId(10L).userId(3L).comment("This is the comment on 10L by 3").build(),
 					Comment.builder().id(18L).postId(10L).userId(4L).comment("This is the comment on 10L by 4").build(),
