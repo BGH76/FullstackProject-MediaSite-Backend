@@ -71,6 +71,6 @@ public class Post implements Comparable<Post>{
 
     @Override
     public int compareTo(Post o) {
-        return (int)(ChronoUnit.DAYS.between(o.getDate(), date));
+        return (int)(ChronoUnit.DAYS.between(date,o.getDate()));
     }
 }
